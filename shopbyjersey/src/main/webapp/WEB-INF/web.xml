@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
+  <display-name>shopbyjersey</display-name>
+  <welcome-file-list>
+    <welcome-file>index.html</welcome-file>
+    <welcome-file>index.htm</welcome-file>
+    <welcome-file>index.jsp</welcome-file>
+    <welcome-file>default.html</welcome-file>
+    <welcome-file>default.htm</welcome-file>
+    <welcome-file>default.jsp</welcome-file>
+  </welcome-file-list>
+  <!--  <servlet>
+        <servlet-name>JerseyServlet</servlet-name>
+        <servlet-class>com.sun.jersey.spi.spring.container.servlet.SpringServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>JerseyServlet</servlet-name>
+        <url-pattern>/rest/*</url-pattern>
+    </servlet-mapping> -->
+
+  <!-- 启动spring容器 -->
+    <listener>
+        <listener-class>
+            org.springframework.web.context.ContextLoaderListener
+        </listener-class>
+    </listener>
+  <context-param>
+        <param-name>contextConfigLocation</param-name>
+        <param-value>
+        	classpath:applicationcontext.xml,
+        	classpath:spring-mybatis.xml
+        </param-value>
+  </context-param>
+
+   
+   <servlet>
+        <servlet-name>JerseyServlet</servlet-name>
+        <servlet-class>org.glassfish.jersey.servlet.ServletContainer</servlet-class>
+        <init-param>
+            <param-name>javax.ws.rs.Application</param-name>        
+            <param-value>com.cn.jerse.UserResource</param-value>
+        </init-param>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>JerseyServlet</servlet-name>
+        <url-pattern>/rest/*</url-pattern>
+    </servlet-mapping>
+    
+     <!--    
+    <servlet>
+<servlet-name>Log4jInit</servlet-name>
+<servlet-class>com.java.log.Log4jInit</servlet-class>
+<init-param>
+<param-name>log4j</param-name>
+<param-value>WEB-INF/classes/log4j.properties</param-value>
+</init-param>
+<load-on-startup>1</load-on-startup>
+</servlet>
+<servlet-mapping>
+<servlet-name>Log4jInit</servlet-name>
+<url-pattern>/log/logfj</url-pattern>
+</servlet-mapping>
+    -->
+</web-app>

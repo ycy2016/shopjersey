@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"      
+ "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+<mapper namespace="com.cn.dao.SearchDAO">
+
+	<!-- 关联查询,嵌套查询 -->
+	<select id="findClient"   resultType="com.cn.enity.Client">
+		select * from client_info 
+	</select> 
+
+	
+	
+	
+	
+	
+	
+</mapper>

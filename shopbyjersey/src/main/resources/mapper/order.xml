@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"      
+ "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+<mapper namespace="com.cn.dao.SearchOrderDAO">
+
+	<!-- 关联查询,嵌套查询 parameterType="com.cn.enity.SearchTool" -->
+	<select id="getOrder" parameterType="com.cn.enity.SearchTool"
+		resultMap="orderResult">
+		select col.order_id,
+		col.prod_code,
+		col.prod_desc,
+		col.pay_date,
+		col.amount,
+		col.total_price,
+		col.mark,
+		col.client_name from
+		(
+		select
+		pro.order_id,
+		pro.prod_code,
+		pro.prod_desc,
+		pro.pay_date,
+		pro.amount,
+		pro.total_price,
+		pro.mark,
+		cli.client_name,
+		rownum rn
+		from production_order pro,
+		client cli
+		where
+		pro.client_id = cli.client_id
+		<!-- 商品 编码 -->
+		<if test="prod_code!=null">
+			and pro.prod_code = #{prod_code}
+		</if>
+		<!-- 商品 名称 -->
+		<if test='prod_desc!=null and prod_desc!="" '>
+			and pro.prod_desc like
+			&apos;%&apos;||#{prod_desc}||&apos;%&apos; </if>
+		<!-- 价格 -->
+		<if test="order_price_up!=null">
+			and pro.total_price &lt;= #{order_price_up}
+		</if>
+		<if test="order_price_down!=null">
+			and pro.total_price &gt;= #{order_price_down}
+		</if>
+		<!-- 时间 -->
+		<if test=' date_start!=null and date_start!="" '>
+			and to_date(pro.pay_date,'yyyy:mm:dd hh24:mi:ss') &gt;=to_date(#{date_start},'yyyy:mm:dd')
+		</if>
+		<if test=' date_end!=null and date_end!="" '>
+			and to_date(pro.pay_date,'yyyy:mm:dd hh24:mi:ss') &lt;=to_date(#{date_end},'yyyy:mm:dd')+ 1
+		</if>
+		and rownum &lt;=( #{limit}+#{offset})  order by order_id desc ) col
+		where col.rn &gt; (#{offset})
+	</select>
+
+	<!-- ProductionOrder 属性与字段不一致 -->
+	<resultMap id="orderResult" type="com.cn.enity.ProductOrder">
+		<id property="order_id" column="order_id" />
+		<result property="prod_code" column="prod_code" />
+		<result property="prod_desc" column="prod_desc" />
+		<result property="order_price" column="total_price" />
+		<result property="order_date" column="pay_date" />
+		<result property="order_amount" column="amount" />
+		<result property="remark" column="mark" />
+		<result property="client_name" column="client_name" />
+	</resultMap>
+
+	<!-- 获取总页数 -->
+	<select id="getPage" parameterType="com.cn.enity.SearchTool"
+		resultType="java.lang.Integer">
+		
+		select
+		count(1)
+		from production_order pro,client cli
+		where
+		pro.client_id = cli.client_id
+		<!-- 商品 编码 -->
+		<if test="prod_code!=null">
+			and pro.prod_code = #{prod_code}
+		</if>
+		<!-- 商品 编码 -->
+		<if test="prod_code!=null">
+			and pro.prod_code = #{prod_code}
+		</if>
+		<!-- 商品 名称 -->
+		<if test='prod_desc!=null and prod_desc!="" '>
+			and pro.prod_desc like
+			&apos;%&apos;||#{prod_desc}||&apos;%&apos; </if>
+		<!-- 价格 -->
+		<if test="order_price_up!=null">
+			and pro.total_price &lt;= #{order_price_up}
+		</if>
+		<if test="order_price_down!=null">
+			and pro.total_price &gt;= #{order_price_down}
+		</if>
+		<!-- 时间 -->
+		<if test=' date_start!=null and date_start!="" '>
+			and to_date(pro.pay_date,'yyyy:mm:dd hh24:mi:ss') &gt;=to_date(#{date_start},'yyyy:mm:dd')
+		</if>
+		<if test=' date_end!=null and date_end!="" '>
+			and to_date(pro.pay_date,'yyyy:mm:dd hh24:mi:ss') &lt;=to_date(#{date_end},'yyyy:mm:dd')+ 1
+		</if>
+	
+	</select>
+
+
+
+
+</mapper>
