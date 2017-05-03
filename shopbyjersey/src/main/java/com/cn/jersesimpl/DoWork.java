@@ -21,6 +21,7 @@ import com.cn.enity.SearchTool;
 import com.cn.service.ServiceImpl;
 //@Component
 //@Scope("request")
+//测试branch切换
 @Path("/user")
 public class DoWork {
 
