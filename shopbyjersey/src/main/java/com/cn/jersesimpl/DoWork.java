@@ -21,6 +21,7 @@ import com.cn.enity.SearchTool;
 import com.cn.service.ServiceImpl;
 //@Component
 //@Scope("request")
+//我在github上直接更改的
 @Path("/user")
 public class DoWork {
 
