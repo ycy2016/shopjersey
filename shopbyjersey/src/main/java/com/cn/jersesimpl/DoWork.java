@@ -21,7 +21,7 @@ import com.cn.enity.SearchTool;
 import com.cn.service.ServiceImpl;
 //@Component
 //@Scope("request")
-//github 上的更新
+//eclipse撒谎能够的跟新
 @Path("/user")
 public class DoWork {
 
