@@ -21,10 +21,16 @@ import com.cn.enity.SearchTool;
 import com.cn.service.ServiceImpl;
 //@Component
 //@Scope("request")
+
 //eclipse撒谎能够的跟新
+
+//github 上的更新
+//github 上的更新 13:49
+
 @Path("/user")
 public class DoWork {
 
+	
 //	Logger.get
 	
 	@Autowired
