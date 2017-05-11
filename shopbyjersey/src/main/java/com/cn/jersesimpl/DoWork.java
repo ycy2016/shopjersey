@@ -2,25 +2,22 @@ package com.cn.jersesimpl;
 
 
 import javax.ws.rs.BeanParam;
-import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
-import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 
 import org.apache.log4j.Logger;
-import org.apache.log4j.PropertyConfigurator;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import com.cn.enity.AjaxResulte;
 import com.cn.enity.ProductionDetail;
 import com.cn.enity.ResulteData;
 import com.cn.enity.SearchTool;
-import com.cn.service.ServiceImpl;
-//@Component
-//@Scope("request")
+import com.cn.service.SearchService;
+import com.cn.service.impl.SearchServiceImpl;
 
 
 //eclipse撒谎能够的跟新
@@ -31,7 +28,7 @@ import com.cn.service.ServiceImpl;
 
 //测试branch切换
 //dev分支上的东西
-
+@Component
 @Path("/user")
 public class DoWork {
 
@@ -39,7 +36,7 @@ public class DoWork {
 //	Logger.get
 	
 	@Autowired
-	private ServiceImpl Impl;
+	private SearchService searchServiceImpl;
 
 	private Logger log = Logger.getLogger(DoWork.class);
 	
@@ -54,7 +51,7 @@ public class DoWork {
 	@Produces(MediaType.APPLICATION_JSON)
 	public ResulteData getOrder(@BeanParam SearchTool searchTool) {
 		log.info("参数"+searchTool.toString());
-		return Impl.getRD(searchTool);
+		return searchServiceImpl.getRD(searchTool);
 	}
 
 	/*
@@ -66,7 +63,7 @@ public class DoWork {
 	@Produces(MediaType.APPLICATION_JSON)
 	public AjaxResulte getDetail(@QueryParam("order_id") Integer order_id) {
 		log.info("详情"+order_id);
-		ProductionDetail pd = Impl.getSodetaildao(order_id);
+		ProductionDetail pd = searchServiceImpl.getSodetaildao(order_id);
 		AjaxResulte ar = new AjaxResulte();
 		ar.setPd(pd);
 		ar.setResulte(true);
