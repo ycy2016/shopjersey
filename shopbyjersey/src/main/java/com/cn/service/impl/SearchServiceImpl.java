@@ -1,4 +1,4 @@
-package com.cn.service;
+package com.cn.service.impl;
 
 import java.util.List;
 
@@ -12,6 +12,7 @@ import com.cn.enity.ProductOrder;
 import com.cn.enity.ProductionDetail;
 import com.cn.enity.ResulteData;
 import com.cn.enity.SearchTool;
+import com.cn.service.SearchService;
 
 /**
  * 
@@ -19,7 +20,7 @@ import com.cn.enity.SearchTool;
  *
  */
 @Service
-public class ServiceImpl {
+public class SearchServiceImpl implements SearchService {
 
 	@Autowired
 	private SearchDAO sdao;
