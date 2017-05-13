@@ -7,31 +7,38 @@
 	<packaging>war</packaging>
 
 	<properties>
+	
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<jersey.version>2.22.2</jersey.version>
-		<jersey-spring.version>2.13</jersey-spring.version>
-		<spring.version>4.0.2.RELEASE</spring.version>
-		<!-- -->
 		<log4j.version>1.2.17</log4j.version>
-
-		<!--<servlet-api-version>3.1.0</servlet-api-version> -->
-		<!--<logback.version>1.1.1</logback.version> -->
-		<!--<jcloverslf4j.version>1.7.6</jcloverslf4j.version> -->
+		 
+       <!--
+        <jersey.version>2.22.2</jersey.version> 
+		<jersey-spring.version>2.13</jersey-spring.version>
+		<spring.version>4.0.2.RELEASE</spring.version>  
+		 -->
+		<!--  -->
+		<jersey.version>1.18</jersey.version> 
+		<jersey-spring.version>1.18</jersey-spring.version>
+		<spring.version>4.1.9.RELEASE</spring.version>
 	</properties>
 
 	<dependencies>
-		<!-- https://mvnrepository.com/artifact/log4j/log4j -->
 		<dependency>
 			<groupId>log4j</groupId>
 			<artifactId>log4j</artifactId>
 			<version>${log4j.version}</version>
 		</dependency>
 
-		<!-- jersey-spring3 -->
-		<dependency>
-			<groupId>org.glassfish.jersey.ext</groupId>
-			<artifactId>jersey-spring3</artifactId>
-			<version>${jersey-spring.version}</version>
+		<!-- jersey-spring3
+		 <dependency> 
+		 	<groupId>org.glassfish.jersey.ext</groupId> 
+			<artifactId>jersey-spring3</artifactId> 
+			<version>${jersey-spring.version}</version> -->
+		<!--  com.sun  jersey-spring  -->
+		<dependency> 
+			<groupId>com.sun.jersey.contribs</groupId>
+			<artifactId>jersey-spring</artifactId>
+			<version>${jersey-spring.version}</version> 
 			<exclusions>
 				<exclusion>
 					<groupId>org.springframework</groupId>
@@ -56,7 +63,7 @@
 			</exclusions>
 		</dependency>
 
-		<!-- jesery 除自身以外,还 需要的另外的jar -->
+		<!-- glass jesery 除自身以外,还 需要的另外的jar  
 		<dependency>
 			<groupId>org.glassfish.jersey.containers</groupId>
 			<artifactId>jersey-container-servlet</artifactId>
@@ -82,7 +89,31 @@
 			<artifactId>jersey-entity-filtering</artifactId>
 			<version>${jersey.version}</version>
 		</dependency>
-
+		-->
+<!--com.sun jersey   -->
+       <dependency>
+            <groupId>com.sun.jersey</groupId>
+            <artifactId>jersey-server</artifactId>
+            <version>${jersey.version}</version>
+        </dependency>
+          <dependency>
+            <groupId>com.sun.jersey</groupId>
+            <artifactId>jersey-core</artifactId>
+            <version>${jersey.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.sun.jersey</groupId>
+            <artifactId>jersey-client</artifactId>
+            <version>${jersey.version}</version>
+        </dependency>
+		<dependency>  
+  		 <groupId>com.sun.jersey</groupId>  
+   		 <artifactId>jersey-json</artifactId>  
+   		 <version>${jersey.version}</version>  
+		</dependency> 
+		
+		
+		
 
 		<!-- Spring4.0.2 -->
 		<dependency>
@@ -135,11 +166,6 @@
 			<version>3.2.8</version>
 		</dependency>
 
-		<!-- log dependencies <dependency> <groupId>ch.qos.logback</groupId> <artifactId>logback-classic</artifactId> 
-			<version>${logback.version}</version> </dependency> <dependency> <groupId>org.slf4j</groupId> 
-			<artifactId>jcl-over-slf4j</artifactId> <version>${jcloverslf4j.version}</version> 
-			</dependency> -->
-
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
@@ -151,11 +177,6 @@
 			<artifactId>commons-dbcp</artifactId>
 			<version>1.4</version>
 		</dependency>
-		<!-- https://mvnrepository.com/artifact/com.oracle/ojdbc14 -->
-		<!-- https://mvnrepository.com/artifact/com.oracle/ojdbc14 -->
-<!-- https://mvnrepository.com/artifact/oracle/ojdbc14 -->
-<!-- https://mvnrepository.com/artifact/ojdbc14/ojdbc14 -->
-
 		<dependency>
 			<groupId>com.oracle</groupId>
 			<artifactId>ojdbc14</artifactId>

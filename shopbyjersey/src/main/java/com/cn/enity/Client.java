@@ -1,15 +1,16 @@
 package com.cn.enity;
 
 import javax.ws.rs.FormParam;
+import javax.ws.rs.QueryParam;
 import javax.xml.bind.annotation.XmlRootElement;
 
 
 @XmlRootElement(name ="Client")
 public class Client {
-	@FormParam(value="client_id")
+	@QueryParam(value="client_id")
 	private Integer client_id;
 	
-	@FormParam(value="client_name")
+	@QueryParam(value="client_name")
 	private String client_name;
 
 	public Integer getClient_id() {

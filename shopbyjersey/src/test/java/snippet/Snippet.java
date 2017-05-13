@@ -5,7 +5,6 @@ import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import com.cn.jersesimpl.DoWork;
 
 public class Snippet {
 	ApplicationContext ac;
@@ -22,10 +21,10 @@ public class Snippet {
 	@Test
 	public void ge(){
 		
-		DoWork dw=ac.getBean("doWork",DoWork.class);
-		//AjaxResulte dl=ac.getBean("bootRes",AjaxResulte.class);
-		
-	System.out.println(dw);
+//		SearchFunction dw=ac.getBean("doWork",SearchFunction.class);
+//		//AjaxResulte dl=ac.getBean("bootRes",AjaxResulte.class);
+//		
+//	System.out.println(dw);
 	}
 	
 	

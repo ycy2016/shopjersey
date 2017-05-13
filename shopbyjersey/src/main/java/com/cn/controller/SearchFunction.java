@@ -1,16 +1,18 @@
-package com.cn.jersesimpl;
+package com.cn.controller;
 
 
-import javax.ws.rs.BeanParam;
+import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Controller;
 
 import com.cn.enity.AjaxResulte;
 import com.cn.enity.ProductionDetail;
@@ -19,26 +21,13 @@ import com.cn.enity.SearchTool;
 import com.cn.service.SearchService;
 import com.cn.service.impl.SearchServiceImpl;
 
-
-//eclipse撒谎能够的跟新
-
-//github 上的更新
-//github 上的更新 13:49
-
-
-//测试branch切换
-//dev分支上的东西
-@Component
+@Component	
 @Path("/user")
-public class DoWork {
-
-	
-//	Logger.get
+public class SearchFunction {
 	
 	@Autowired
 	private SearchService searchServiceImpl;
-
-	private Logger log = Logger.getLogger(DoWork.class);
+	private Logger log = Logger.getLogger(SearchFunction.class);
 	
 	/**
 	 * 返回的格式为json,需按照bootsrap-table组件参数要求返回rows和 total
@@ -49,7 +38,9 @@ public class DoWork {
 	@Path("getlist")
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	public ResulteData getOrder(@BeanParam SearchTool searchTool) {
+	public ResulteData getOrder(@Context HttpServletRequest hsr) {
+		SearchTool searchTool =new SearchTool();
+		getSearchParam(hsr, searchTool);
 		log.info("参数"+searchTool.toString());
 		return searchServiceImpl.getRD(searchTool);
 	}
@@ -58,7 +49,6 @@ public class DoWork {
 	 * 获得商品详情
 	 */
 	@Path("getDetail")
-	// 前端传过来的参数
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	public AjaxResulte getDetail(@QueryParam("order_id") Integer order_id) {
@@ -70,4 +60,17 @@ public class DoWork {
 		return ar;
 	}
 
+	/**
+	 * 封装参数
+	 * @param hsr
+	 * @param searchTool
+	 */
+	private void getSearchParam(HttpServletRequest hsr, SearchTool searchTool) {
+		searchTool.setLimit(Integer.valueOf( hsr.getParameter("limit")));
+		searchTool.setOffset(Integer.valueOf(hsr.getParameter("offset")));
+		if(hsr.getParameter("prod_code")!=null&&!"".equals(hsr.getParameter("prod_code")))searchTool.setProd_code(Integer.valueOf(hsr.getParameter("prod_code")));
+		searchTool.setDate_start(hsr.getParameter("date_start"));
+		searchTool.setDate_end(hsr.getParameter("date_end"));
+	}
+	
 }
