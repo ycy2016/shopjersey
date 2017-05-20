@@ -178,7 +178,8 @@
 			<version>1.4</version>
 		</dependency>
 		
-		<!-- 在git上更改了pomx.ml
+		<!-- 1/在git上更改了pom.xml
+		2/第二次在git上更改pomxml
 		<dependency>
 			<groupId>com.oracle</groupId>
 			<artifactId>ojdbc14</artifactId>
