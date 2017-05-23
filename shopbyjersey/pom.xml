@@ -178,6 +178,13 @@
 			<version>1.4</version>
 		</dependency>
 		
+		
+	<dependency>
+   		 <groupId>javax.servlet</groupId>
+   		 <artifactId>javax.servlet-api</artifactId>
+  		 <version>3.1.0</version>
+	</dependency>
+ 
 		<!-- 1/在git上更改了pom.xml
 		2/第二次在git上更改pomxml
 		<dependency>
@@ -190,6 +197,24 @@
 	</dependencies>
 <!--第三次 更新git / 第四次 更新git -->
 	<build>
+	
+		
+		<finalName>prj_mas_dtc_2016</finalName>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.apache.tomcat.maven</groupId>
+					<artifactId>tomcat6-maven-plugin</artifactId>
+					<version>2.2</version>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.tomcat.maven</groupId>
+					<artifactId>tomcat7-maven-plugin</artifactId>
+					<version>2.2</version>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+	
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -201,6 +226,11 @@
 				</configuration>
 			</plugin>
 		</plugins>
+		
+		
+		
+
+		
 	</build>
 
 </project>
